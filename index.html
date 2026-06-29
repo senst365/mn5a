@@ -1830,8 +1830,10 @@ window.togglePassword = function(inputId, btn){
   if(btn) btn.textContent = show ? "隱藏" : "顯示";
 };
 
-function renderLogin(){
+window.renderLogin = function(){
+  try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch(e) {}
   currentRole = null; currentStudent = null; selectedStudentForTeacher = null;
+  currentLesson = null; currentQuestions = []; currentIndex = 0; answers = {}; reviewMode = false; reviewOriginalIndexes = [];
   app.innerHTML = `
     <section class="card login-box">
       <h2>請選擇登入身分</h2>
@@ -1844,6 +1846,11 @@ function renderLogin(){
   `;
   updateSyncBadge();
 }
+
+
+window.logoutToLogin = function(){
+  window.renderLogin();
+};
 
 function updateSyncBadge(){
   const el = document.getElementById("syncBadge");
@@ -1928,7 +1935,7 @@ window.renderStudentHome = function(){
         </div>
         <div class="row">
           <button class="ghost small" onclick="openSettings()">⚙️ 報讀設定</button>
-          <button class="secondary small" onclick="renderLogin()">登出</button>
+          <button class="secondary small" onclick="logoutToLogin()">登出</button>
         </div>
       </div>
     </div>
@@ -2166,7 +2173,7 @@ window.renderTeacherDashboard = function(){
           <button class="ghost small" onclick="renderTeacherDashboard()">重新整理</button>
           <button class="warn small" onclick="exportRecords()">匯出紀錄JSON</button>
           <button class="bad small" onclick="clearAllRecords()">清除本機紀錄</button>
-          <button class="secondary small" onclick="renderLogin()">登出</button>
+          <button class="secondary small" onclick="logoutToLogin()">登出</button>
         </div>
       </div>
     </div>
@@ -2286,7 +2293,7 @@ async function initOptionalFirebase(){
   }
 }
 
-renderLogin();
+window.renderLogin();
 initOptionalFirebase();
 </script>
 </body>
