@@ -1,0 +1,2259 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>潛能班國A組暑假作業</title>
+  <style>
+    :root {
+      --bg:#fff7ed; --card:#ffffff; --main:#fb923c; --main2:#f97316;
+      --good:#22c55e; --warn:#facc15; --bad:#ef4444; --ink:#334155;
+      --soft:#fef3c7; --line:#fed7aa; --pink:#fbcfe8; --sky:#bae6fd;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin:0; font-family:"Microsoft JhengHei", "Noto Sans TC", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(251,207,232,.55) 0 90px, transparent 91px),
+        radial-gradient(circle at 92% 18%, rgba(186,230,253,.65) 0 115px, transparent 116px),
+        radial-gradient(circle at 80% 85%, rgba(254,243,199,.75) 0 130px, transparent 131px),
+        linear-gradient(180deg,#fff7ed 0%,#f0f9ff 100%);
+      color:var(--ink); line-height:1.6; min-height:100vh;
+    }
+    header {
+      padding:26px 18px 30px; text-align:center; color:#7c2d12;
+      background:linear-gradient(135deg,#fde68a,#fed7aa 50%,#fbcfe8);
+      box-shadow:0 8px 24px rgba(251,146,60,.22);
+      border-bottom:6px solid rgba(255,255,255,.75);
+    }
+    header h1 { margin:0; font-size:clamp(28px,4.5vw,44px); letter-spacing:.05em; font-weight:900; text-shadow:0 2px 0 rgba(255,255,255,.7); }
+    header h1::before { content:"🌈 "; pointer-events:none; }
+    header h1::after { content:" 🐻"; pointer-events:none; }
+    header p { margin:6px 0 0; opacity:.95; }
+    main { width:min(1180px,94vw); margin:22px auto 48px; }
+    .card {
+      background:rgba(255,255,255,.94); border:2px solid rgba(254,215,170,.9); border-radius:28px;
+      padding:26px; box-shadow:0 14px 30px rgba(251,146,60,.12); margin-bottom:20px; position:relative; z-index:1;
+    }
+    .card h2 { font-size:clamp(26px,4vw,36px); color:#9a3412; margin-top:4px; text-align:center; }
+    .login-box { position:relative; overflow:hidden; }
+    .login-box::before { content:"⭐"; position:absolute; left:20px; top:16px; font-size:32px; opacity:.35; pointer-events:none; }
+    .login-box::after { content:"☁️"; position:absolute; right:22px; top:16px; font-size:34px; opacity:.55; pointer-events:none; }
+    .row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+    .space { justify-content:space-between; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; }
+    button {
+      border:0; border-radius:18px; padding:13px 18px; cursor:pointer; font-weight:900;
+      background:var(--main); color:white; transition:.15s; font-size:18px;
+      box-shadow:0 6px 0 rgba(194,65,12,.18), 0 10px 18px rgba(251,146,60,.16);
+      position:relative; z-index:1; touch-action:manipulation; -webkit-tap-highlight-color: transparent;
+    }
+    button:hover { transform:translateY(-2px); background:var(--main2); }
+    button:active { transform:translateY(1px); box-shadow:0 3px 0 rgba(194,65,12,.18); }
+    .role-buttons { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:22px 0; }
+    button.role-btn { min-height:96px; font-size:clamp(24px,4vw,34px); border-radius:28px; line-height:1.25; }
+    button.role-btn .sub { display:block; font-size:15px; font-weight:800; opacity:.9; margin-top:4px; }
+    button.secondary { background:#64748b; }
+    button.good { background:var(--good); }
+    button.warn { background:var(--warn); color:#111827; }
+    button.bad { background:var(--bad); }
+    button.ghost { background:#fff7ed; color:#c2410c; border:2px solid #fed7aa; box-shadow:none; }
+    button.small { padding:8px 12px; border-radius:14px; font-size:15px; }
+    button.tts { min-width:40px; padding:8px 10px; border-radius:999px; background:#0ea5e9; }
+    input, select {
+      padding:15px 16px; border:2px solid #fed7aa; border-radius:18px; font-size:20px;
+      background:white; outline:none;
+    }
+    input:focus, select:focus { border-color:#fb923c; box-shadow:0 0 0 4px rgba(251,146,60,.18); }
+    .login-box { max-width:760px; margin:0 auto; }
+    .student-btn {
+      background:linear-gradient(135deg,#fff7ed,#fef3c7); border:3px solid #fdba74; color:#9a3412; border-radius:28px;
+      padding:28px 18px; text-align:center; font-size:clamp(24px,4vw,32px); font-weight:900; cursor:pointer;
+      box-shadow:0 8px 0 rgba(251,146,60,.22), 0 12px 20px rgba(251,146,60,.12);
+      transition:.15s;
+    }
+    .student-btn::before { content:"👦 "; pointer-events:none; }
+    .student-btn:hover { background:linear-gradient(135deg,#ffedd5,#fde68a); transform:translateY(-2px); }
+    .student-btn:active { transform:translateY(1px); box-shadow:0 4px 0 rgba(251,146,60,.22); }
+    .lesson-card {
+      border:1px solid var(--line); border-radius:18px; padding:18px; background:#fff;
+      position:relative; min-height:150px;
+    }
+    .lesson-card h3 { margin:0 0 8px; font-size:22px; color:#9a3412; }
+    .score-pill {
+      display:inline-block; padding:5px 10px; border-radius:999px; font-weight:800;
+      background:#f1f5f9; color:#334155; margin:2px 0 12px;
+    }
+    .score-pass { background:#dcfce7; color:#166534; }
+    .score-fail { background:#fee2e2; color:#991b1b; }
+    .qbox { background:#eff6ff; border-left:6px solid #2563eb; padding:18px; border-radius:16px; }
+    .qbox h2 { margin:0 0 10px; }
+    .option {
+      display:flex; align-items:center; gap:12px; padding:14px; margin:10px 0;
+      border:2px solid #dbeafe; border-radius:15px; background:#fff; cursor:pointer;
+    }
+    .option:hover { background:#f8fafc; border-color:#93c5fd; }
+    .option.selected { background:#dbeafe; border-color:#2563eb; }
+    .option.correct { background:#dcfce7; border-color:#22c55e; }
+    .option.wrong { background:#fee2e2; border-color:#ef4444; }
+    .option .letter {
+      width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+      background:#e0f2fe;color:#075985;font-weight:900; flex:0 0 auto;
+    }
+    .progress {
+      height:12px; background:#e2e8f0; border-radius:999px; overflow:hidden; margin:12px 0;
+    }
+    .progress > div { height:100%; background:linear-gradient(90deg,#22c55e,#38bdf8); }
+    .notice { padding:14px 16px; border-radius:14px; background:#fff7ed; border:1px solid #fed7aa; color:#9a3412; }
+    .ok { background:#ecfdf5; border-color:#bbf7d0; color:#166534; }
+    .bad-note { background:#fef2f2; border-color:#fecaca; color:#991b1b; }
+    .explain { background:#f0fdf4; border:1px solid #bbf7d0; border-radius:14px; padding:14px; margin-top:12px; }
+    .muted { color:#64748b; font-size:14px; }
+    table { width:100%; border-collapse:collapse; background:white; border-radius:14px; overflow:hidden; }
+    th,td { border-bottom:1px solid #e2e8f0; padding:10px; text-align:left; vertical-align:top; }
+    th { background:#fff7ed; color:#9a3412; }
+    details { border:1px solid var(--line); border-radius:14px; padding:12px; margin:12px 0; background:#fff; }
+    summary { cursor:pointer; font-weight:800; color:#c2410c; }
+    .settings {
+      position:fixed; top:0; right:0; width:min(420px,94vw); height:100vh; background:white;
+      box-shadow:-8px 0 25px rgba(15,23,42,.18); padding:22px; z-index:10; transform:translateX(105%);
+      transition:.2s; overflow:auto;
+    }
+    .settings.open { transform:translateX(0); }
+    .cover { position:fixed; inset:0; background:rgba(15,23,42,.35); display:none; z-index:9; }
+    .cover.show { display:block; }
+    .top-fixed { position:sticky; top:0; z-index:3; background:rgba(248,250,252,.93); backdrop-filter:blur(8px); padding:10px 0; }
+    .hide { display:none !important; }
+    .sync { font-size:13px; padding:4px 9px; border-radius:999px; background:#e2e8f0; color:#475569; }
+    .sync.on { background:#dcfce7; color:#166534; }
+    @media (max-width:620px) {
+      .row { align-items:stretch; }
+      button,input,select { width:100%; }
+      .role-buttons { grid-template-columns:1fr; }
+      .option { align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>潛能班國A組暑假作業</h1>
+</header>
+
+<main id="app"></main>
+<div class="cover" id="cover" onclick="closeSettings()"></div>
+<aside class="settings" id="settingsPanel">
+  <div class="row space">
+    <h2 style="margin:0;">⚙️ 報讀設定</h2>
+    <button class="secondary small" onclick="closeSettings()">關閉</button>
+  </div>
+  <label>語音風格</label>
+  <select id="voiceSelect" style="width:100%;margin:6px 0 14px;"></select>
+  <label>語速：<span id="rateLabel"></span></label>
+  <input id="rateRange" type="range" min="0.5" max="2" step="0.1" style="width:100%;" />
+  <button onclick="testVoice()" class="good" style="margin-top:14px;">🔊 測試報讀</button>
+</aside>
+
+<script type="module">
+const students = {
+  "林昱翔": "603",
+  "蔡幃宸": "401",
+  "蘇彥霖": "403"
+};
+const TEACHER_PASSWORD = "tset";
+const lessonsData = [
+  {
+    "id": 1,
+    "title": "幸福筆記本",
+    "questions": [
+      [
+        "作者的床頭有一本什麼？",
+        [
+          "旅行日記",
+          "幸福筆記本",
+          "成績紀錄本",
+          "繪畫本"
+        ],
+        1,
+        "第1段提到，在作者的床頭有一本「幸福筆記本」。",
+        "1"
+      ],
+      [
+        "幸福筆記本記錄了作者生活中什麼時刻？",
+        [
+          "考試分數",
+          "每天的作業內容",
+          "各種美好的時刻",
+          "別人的缺點"
+        ],
+        2,
+        "第1段說明，這本筆記本記錄生活中各種美好的時刻。",
+        "1"
+      ],
+      [
+        "作者陪父親散步時，父親已經幾歲？",
+        [
+          "五十幾歲",
+          "六十幾歲",
+          "八十幾歲",
+          "七十幾歲"
+        ],
+        3,
+        "第2段寫到，作者的父親已經七十幾歲，仍然健步如飛。",
+        "2"
+      ],
+      [
+        "孩子們在作者回家時做了什麼？",
+        [
+          "一擁而上給作者擁抱",
+          "安靜寫功課",
+          "躲在房間裡",
+          "要求作者買東西"
+        ],
+        0,
+        "第3段提到，孩子們一擁而上，帶著笑臉給作者大大的擁抱。",
+        "3"
+      ],
+      [
+        "作者停車時不小心造成什麼事？",
+        [
+          "撞壞路燈",
+          "弄丟鑰匙",
+          "碰出別人車身幾道擦痕",
+          "停到學校操場"
+        ],
+        2,
+        "第4段寫到，作者停車時不小心在別人的車身碰出幾道擦痕。",
+        "4"
+      ],
+      [
+        "車主後來對作者的態度是什麼？",
+        [
+          "責怪並要求高額賠償",
+          "拒絕與作者說話",
+          "立刻報警罵人",
+          "沒有責怪，也沒有索取賠償"
+        ],
+        3,
+        "第4段說明，車主沒有責怪作者，也沒有索取賠償，甚至分享停車技巧。",
+        "4"
+      ],
+      [
+        "作者認為什麼是帶來幸福的魔法？",
+        [
+          "金錢",
+          "感恩",
+          "比賽",
+          "旅行"
+        ],
+        1,
+        "第5段第一句寫到，感恩是為作者帶來幸福的魔法。",
+        "5"
+      ],
+      [
+        "作者每晚睡前會回想幾件值得感恩的事？",
+        [
+          "三件",
+          "兩件",
+          "一件",
+          "五件"
+        ],
+        0,
+        "第5段提到，作者每晚睡前會回想這一天值得感恩的三件事。",
+        "5"
+      ],
+      [
+        "作者把感恩比喻成腦袋中的什麼？",
+        [
+          "相機",
+          "收音機",
+          "雨傘",
+          "聚光燈"
+        ],
+        3,
+        "第5段寫到，感恩就像把腦袋中的聚光燈照在比較美好的地方。",
+        "5"
+      ],
+      [
+        "這本筆記本每天陪作者做什麼？",
+        [
+          "抱怨生活",
+          "安排考試",
+          "感謝身邊的人事物",
+          "計算花費"
+        ],
+        2,
+        "第5段最後寫到，這本筆記本每天陪著作者感謝身邊的人事物。",
+        "5"
+      ]
+    ]
+  },
+  {
+    "id": 2,
+    "title": "做人做事做長久",
+    "questions": [
+      [
+        "前幾天來安裝冷氣機的是誰？",
+        [
+          "老闆",
+          "作者的父親",
+          "小師傅",
+          "鄰居"
+        ],
+        2,
+        "第1段提到，依約而來安裝冷氣機的是小師傅。",
+        "1"
+      ],
+      [
+        "小師傅看起來大約幾歲？",
+        [
+          "十二、三歲",
+          "七十幾歲",
+          "三十幾歲",
+          "十八、九歲"
+        ],
+        3,
+        "第1段寫到，小師傅看來只有十八、九歲。",
+        "1"
+      ],
+      [
+        "作者自願充當小師傅的什麼角色？",
+        [
+          "助手",
+          "顧客",
+          "老師",
+          "司機"
+        ],
+        0,
+        "第1段提到，作者自願充當助手。",
+        "1"
+      ],
+      [
+        "小師傅在工作前把必用工具怎麼處理？",
+        [
+          "丟在地上",
+          "全部放進箱子不拿出來",
+          "按使用順序排好",
+          "交給作者保管"
+        ],
+        2,
+        "第2段寫到，小師傅先將必用工具按使用順序排好。",
+        "2"
+      ],
+      [
+        "輕便的螺絲起子和壁虎釘放在哪裡？",
+        [
+          "桌上",
+          "口袋裡",
+          "車頂",
+          "工作腰帶"
+        ],
+        3,
+        "第2段提到，輕便工具放在隨身的工作腰帶。",
+        "2"
+      ],
+      [
+        "小師傅完成安裝大約花了多久？",
+        [
+          "三個小時",
+          "不到半小時",
+          "一天",
+          "一星期"
+        ],
+        1,
+        "第3段寫到，半小時不到就搬走鐵梯了。",
+        "3"
+      ],
+      [
+        "小師傅安裝後還做了什麼？",
+        [
+          "清掃地板並清潔牆壁",
+          "立刻離開",
+          "要求加錢",
+          "把工具留在作者家"
+        ],
+        0,
+        "第3段提到，他用掃把清掃地板，再拿抹布清潔牆壁。",
+        "3"
+      ],
+      [
+        "作者覺得小師傅的什麼精神令人驚喜？",
+        [
+          "購物精神",
+          "冒險精神",
+          "比賽精神",
+          "服務精神"
+        ],
+        3,
+        "第4段寫到，小師傅的服務精神令作者驚喜。",
+        "4"
+      ],
+      [
+        "小師傅說本店業績最大的保障是什麼？",
+        [
+          "廣告",
+          "降價",
+          "顧客的口碑",
+          "店面大小"
+        ],
+        2,
+        "第5段提到，顧客的口碑是本店業績最大的保障。",
+        "5"
+      ],
+      [
+        "作者預見小師傅只要保持工作態度與服務精神，未來會怎樣？",
+        [
+          "放棄工作",
+          "獲得成功",
+          "搬到國外",
+          "忘記工具"
+        ],
+        1,
+        "第7段寫到，可以預見他的成功。",
+        "7"
+      ]
+    ]
+  },
+  {
+    "id": 3,
+    "title": "孔雀錯了",
+    "questions": [
+      [
+        "作者念初中時，作文發下來常有什麼？",
+        [
+          "英文單字",
+          "很多貼紙",
+          "空白頁",
+          "密密麻麻的紅圈圈"
+        ],
+        3,
+        "第1段提到，作者的作文常是密密麻麻的連排紅圈圈。",
+        "1"
+      ],
+      [
+        "和作者並排坐的同學叫什麼名字？",
+        [
+          "曹萱玲",
+          "黛拉",
+          "彤彤",
+          "蘇菲"
+        ],
+        0,
+        "第1段寫到，和作者並排坐的同學名叫曹萱玲。",
+        "1"
+      ],
+      [
+        "英文課時，誰的考卷分數常比作者高一點？",
+        [
+          "老師",
+          "作者的妹妹",
+          "曹萱玲",
+          "外公"
+        ],
+        2,
+        "第2段提到，曹萱玲的英文考卷分數總比作者高一點。",
+        "2"
+      ],
+      [
+        "曹萱玲英文考卷分數較高的原因之一是什麼？",
+        [
+          "她有幸福筆記本",
+          "她坐在前排",
+          "她不寫作文",
+          "字寫得清楚、漂亮"
+        ],
+        3,
+        "第2段說明，她的字寫得比作者清楚、漂亮，造句也好。",
+        "2"
+      ],
+      [
+        "作者希望曹萱玲考試時怎樣？",
+        [
+          "得到滿分",
+          "多錯幾道題",
+          "請假不來",
+          "幫作者寫字"
+        ],
+        1,
+        "第3段寫到，作者希望她多錯幾道題。",
+        "3"
+      ],
+      [
+        "老師講的故事中有幾隻孔雀？",
+        [
+          "兩隻",
+          "一隻",
+          "三隻",
+          "四隻"
+        ],
+        0,
+        "第4段提到，有兩隻孔雀。",
+        "4"
+      ],
+      [
+        "孔雀把彼此的什麼弄得七零八落？",
+        [
+          "鳥巢",
+          "腳",
+          "翅膀",
+          "尾巴"
+        ],
+        3,
+        "第4段寫到，牠們攻擊彼此，把尾巴弄得七零八落。",
+        "4"
+      ],
+      [
+        "老師認為孔雀應該愛惜什麼？",
+        [
+          "教室窗戶",
+          "別人的鉛筆",
+          "自己的羽毛",
+          "英文考卷"
+        ],
+        2,
+        "第4段提到，牠們應當好好愛惜自己的羽毛。",
+        "4"
+      ],
+      [
+        "聽完故事後，作者和曹萱玲有什麼反應？",
+        [
+          "互相大哭",
+          "不好意思地笑了",
+          "立刻吵架",
+          "跑出校門"
+        ],
+        1,
+        "第5段寫到，曹萱玲笑了一下，作者也不好意思地笑了。",
+        "5"
+      ],
+      [
+        "下課後，作者和曹萱玲到草地上做什麼？",
+        [
+          "安裝冷氣",
+          "寫考卷",
+          "拍球、踢毽子",
+          "看海"
+        ],
+        2,
+        "第6段提到，她們到草地上拍球、踢毽子。",
+        "6"
+      ]
+    ]
+  },
+  {
+    "id": 4,
+    "title": "特別的海",
+    "questions": [
+      [
+        "臺灣因為擁有大大小小的什麼，所以海成為輕易可見的風景？",
+        [
+          "島",
+          "沙漠",
+          "高樓",
+          "農田"
+        ],
+        0,
+        "第1段提到，臺灣擁有大大小小的島，海因此成為輕易可見的風景。",
+        "1"
+      ],
+      [
+        "從高空俯視哪裡，可以看到「烏龜喝牛奶」的畫面？",
+        [
+          "馬祖西莒島",
+          "金門貴山海灘",
+          "宜蘭外海的龜山島",
+          "太魯閣"
+        ],
+        2,
+        "第2段寫到，從高空俯視宜蘭外海的龜山島，可以看見這奇趣畫面。",
+        "2"
+      ],
+      [
+        "牛奶海的海水是什麼顏色？",
+        [
+          "金色",
+          "黑色",
+          "紅色",
+          "乳白色"
+        ],
+        3,
+        "第2段提到，那片海水像牛奶一樣的乳白色。",
+        "2"
+      ],
+      [
+        "牛奶海伴隨的氣味像什麼？",
+        [
+          "花香",
+          "壞掉的雞蛋",
+          "烤餅乾",
+          "青草"
+        ],
+        1,
+        "第2段寫到，氣味聞起來像壞掉的雞蛋。",
+        "2"
+      ],
+      [
+        "龜山島是什麼島？",
+        [
+          "火山島",
+          "珊瑚島",
+          "人工島",
+          "沙洲"
+        ],
+        0,
+        "第3段提到，龜山島是座火山島。",
+        "3"
+      ],
+      [
+        "海底熱泉遇到相對低溫的海水時，會產生什麼？",
+        [
+          "黑色沙子",
+          "金幣",
+          "魚群",
+          "白色物質"
+        ],
+        3,
+        "第3段說明，熱泉遇到較低溫海水會產生白色物質。",
+        "3"
+      ],
+      [
+        "在馬祖哪裡可以觀賞方格海？",
+        [
+          "東引燈塔",
+          "臺北港",
+          "西莒島的海灘",
+          "池上稻田"
+        ],
+        2,
+        "第4段提到，在馬祖西莒島的海灘可以看到海水畫表格。",
+        "4"
+      ],
+      [
+        "入夜以後，方格海上有什麼閃耀著亮藍色螢光？",
+        [
+          "螢火蟲",
+          "藍眼淚",
+          "星星",
+          "汽車燈"
+        ],
+        1,
+        "第4段寫到，入夜以後，藍眼淚星羅棋布，整片方格海閃耀亮藍色螢光。",
+        "4"
+      ],
+      [
+        "方格海形成的原因和什麼有關？",
+        [
+          "船隻太多",
+          "天氣太熱",
+          "地形與海流",
+          "魚群游動"
+        ],
+        2,
+        "第5段提到，方格海由於地形與海流關係而形成。",
+        "5"
+      ],
+      [
+        "金門哪個海灘也能見到方格海畫面？",
+        [
+          "燕子口",
+          "白沙灣",
+          "清水斷崖",
+          "貴山海灘"
+        ],
+        3,
+        "第5段提到，金門的貴山海灘也因同樣原因能見到方格海。",
+        "5"
+      ]
+    ]
+  },
+  {
+    "id": 5,
+    "title": "漫遊花東",
+    "questions": [
+      [
+        "車子行駛在公路上時，一側是陡峭山壁，另一側是什麼？",
+        [
+          "大片沙漠",
+          "無邊湛藍",
+          "熱鬧市區",
+          "白色雪地"
+        ],
+        1,
+        "第1段寫到，一側是陡峭山壁，一側是無邊湛藍。",
+        "1"
+      ],
+      [
+        "作者期待和朋友們去哪裡旅行？",
+        [
+          "金門",
+          "臺北",
+          "花東",
+          "西班牙"
+        ],
+        2,
+        "第1段提到，作者期待著與朋友們的花東之旅。",
+        "1"
+      ],
+      [
+        "車子經過清水斷崖後，往哪裡開去？",
+        [
+          "學校",
+          "海底",
+          "機場",
+          "山裡"
+        ],
+        3,
+        "第2段寫到，經過清水斷崖沒多久，車子轉彎往山裡開去。",
+        "2"
+      ],
+      [
+        "作者進入的是哪一座國家公園？",
+        [
+          "太魯閣國家公園",
+          "墾丁國家公園",
+          "陽明山國家公園",
+          "玉山國家公園"
+        ],
+        0,
+        "第2段提到，他們直到進入太魯閣國家公園。",
+        "2"
+      ],
+      [
+        "作者在太魯閣最難忘的是哪一條步道？",
+        [
+          "環湖步道",
+          "合歡山步道",
+          "燕子口步道",
+          "森林小徑"
+        ],
+        2,
+        "第3段寫到，其中最難忘的是燕子口步道。",
+        "3"
+      ],
+      [
+        "深谷裡的溪水發出什麼聲音？",
+        [
+          "沙沙沙",
+          "叮咚叮咚",
+          "咕嚕咕嚕",
+          "嘩啦嘩啦"
+        ],
+        3,
+        "第4段提到，滾滾溪水奔流，發出嘩啦嘩啦的聲音。",
+        "4"
+      ],
+      [
+        "隔天大家在哪裡休息一夜後往臺東前進？",
+        [
+          "臺北車站",
+          "花蓮臨海旅社",
+          "學校教室",
+          "西莒島"
+        ],
+        1,
+        "第5段寫到，在花蓮臨海旅社休息一夜後，往臺東前進。",
+        "5"
+      ],
+      [
+        "進入花東縱谷後，鹹鹹海風轉為什麼味道？",
+        [
+          "田野味道",
+          "蛋糕味道",
+          "藥水味道",
+          "煙味"
+        ],
+        0,
+        "第5段提到，淡去的鹹鹹海風轉為田野味道。",
+        "5"
+      ],
+      [
+        "池上最有名的是什麼？",
+        [
+          "金錶",
+          "螃蟹",
+          "冷氣機",
+          "稻米"
+        ],
+        3,
+        "第6段寫到，池上的稻米相當有名。",
+        "6"
+      ],
+      [
+        "作者看著稻田時大喊浪從藍色變成什麼顏色？",
+        [
+          "黑色",
+          "紅色",
+          "綠色",
+          "白色"
+        ],
+        2,
+        "第7段寫到，作者大喊：「浪從藍色成了綠色啦！」",
+        "7"
+      ]
+    ]
+  },
+  {
+    "id": 6,
+    "title": "護送螃蟹過馬路",
+    "questions": [
+      [
+        "活動是在什麼時間展開的？",
+        [
+          "早上六點",
+          "中午十二點",
+          "傍晚六點",
+          "深夜十二點"
+        ],
+        2,
+        "第1段提到，傍晚六點展開「護送螃蟹過馬路」的活動。",
+        "1"
+      ],
+      [
+        "作者在哪裡參加護送螃蟹過馬路的活動？",
+        [
+          "南郭國小",
+          "太魯閣國家公園",
+          "奎爾公園",
+          "墾丁國家公園"
+        ],
+        3,
+        "第1段寫到，作者在墾丁國家公園解說員引導下展開活動。",
+        "1"
+      ],
+      [
+        "作者用什麼四處探照？",
+        [
+          "手電筒",
+          "手機",
+          "蠟燭",
+          "路燈"
+        ],
+        0,
+        "第2段提到，作者拿著手電筒四處探照。",
+        "2"
+      ],
+      [
+        "公路旁小水溝內的螃蟹是什麼顏色？",
+        [
+          "深藍色",
+          "雪白色",
+          "火紅色",
+          "金黃色"
+        ],
+        2,
+        "第2段寫到，一隻隻火紅色的螃蟹華麗亮相。",
+        "2"
+      ],
+      [
+        "螃蟹腹部聚集的深灰色像什麼？",
+        [
+          "花朵",
+          "石頭山",
+          "水杯",
+          "泥沙球"
+        ],
+        3,
+        "第3段提到，腹部深灰色像被水浸溼的泥沙球。",
+        "3"
+      ],
+      [
+        "海洋對螃蟹來說是什麼？",
+        [
+          "學校",
+          "育兒室",
+          "停車場",
+          "市場"
+        ],
+        1,
+        "第4段寫到，海洋是螃蟹的育兒室。",
+        "4"
+      ],
+      [
+        "人類在螃蟹家門前開了哪一條路？",
+        [
+          "臺二十六線",
+          "國道一號",
+          "中山路",
+          "鐵路"
+        ],
+        0,
+        "第4段提到，人類在螃蟹的家門前開了一條路（臺二十六線）。",
+        "4"
+      ],
+      [
+        "作者一行人為了讓螃蟹平安通過，充當什麼？",
+        [
+          "導遊",
+          "廚師",
+          "售票員",
+          "交通警察"
+        ],
+        3,
+        "第5段寫到，他們只好充當交通警察，阻斷車潮。",
+        "5"
+      ],
+      [
+        "螃蟹到海邊後，把什麼抖進水裡？",
+        [
+          "花瓣",
+          "石頭",
+          "肚子的那團沙球",
+          "錶鍊"
+        ],
+        2,
+        "第6段提到，螃蟹把肚子的那團沙球抖進水裡。",
+        "6"
+      ],
+      [
+        "作者稱車水馬龍的公路像什麼？",
+        [
+          "幸福筆記本",
+          "鬼門關",
+          "森林",
+          "糖霜屋頂"
+        ],
+        1,
+        "第7段寫到，幫助螃蟹度過車水馬龍的「鬼門關」。",
+        "7"
+      ]
+    ]
+  },
+  {
+    "id": 7,
+    "title": "高第的魔法建築",
+    "questions": [
+      [
+        "高第的建築在哪個國家的巴塞隆納？",
+        [
+          "日本",
+          "臺灣",
+          "加拿大",
+          "西班牙"
+        ],
+        3,
+        "第1段提到，這些想像在西班牙的巴塞隆納實現。",
+        "1"
+      ],
+      [
+        "高第從小喜歡觀察什麼？",
+        [
+          "大自然",
+          "電腦",
+          "考卷",
+          "車站"
+        ],
+        0,
+        "第2段寫到，高第從小喜歡觀察大自然。",
+        "2"
+      ],
+      [
+        "高第作品的特色是什麼線條？",
+        [
+          "全是方格線",
+          "筆直僵硬的線條",
+          "圓弧流動的線條",
+          "看不見線條"
+        ],
+        2,
+        "第2段提到，圓弧流動的線條成為他作品的特色。",
+        "2"
+      ],
+      [
+        "有波浪狀牆面的建築是哪一棟？",
+        [
+          "學校",
+          "巴特羅之家",
+          "聖家堂",
+          "米拉之家"
+        ],
+        3,
+        "第3段寫到，有著波浪狀牆面的「米拉之家」。",
+        "3"
+      ],
+      [
+        "米拉之家屋頂上造型怪異的是什麼？",
+        [
+          "花朵",
+          "煙囪",
+          "課桌椅",
+          "鐘錶"
+        ],
+        1,
+        "第3段提到，屋頂上一個個造型怪異的煙囪。",
+        "3"
+      ],
+      [
+        "巴特羅之家的屋頂用什麼拼貼？",
+        [
+          "五彩磁磚",
+          "白色紙張",
+          "木頭積木",
+          "黑色鐵板"
+        ],
+        0,
+        "第4段寫到，屋頂用五彩磁磚拼貼。",
+        "4"
+      ],
+      [
+        "作者最愛奎爾公園門口哪種造型的房子？",
+        [
+          "金字塔造型",
+          "貝殼造型",
+          "火車造型",
+          "薑餅屋造型"
+        ],
+        3,
+        "第5段提到，作者最愛奎爾公園門口兩棟薑餅屋造型的房子。",
+        "5"
+      ],
+      [
+        "奎爾公園兩道白色樓梯間有一隻什麼？",
+        [
+          "螃蟹",
+          "孔雀",
+          "彩色大蜥蜴",
+          "猿猴"
+        ],
+        2,
+        "第5段寫到，兩道白色樓梯間有一隻彩色的大蜥蜴。",
+        "5"
+      ],
+      [
+        "作者認為最足以展現高第建築生命力的作品是什麼？",
+        [
+          "幸福筆記本",
+          "聖家堂",
+          "金錶",
+          "購票說明"
+        ],
+        1,
+        "第6段提到，最足以展現高第建築生命力的作品是聖家堂。",
+        "6"
+      ],
+      [
+        "聖家堂建了一百四十多年，未完工就被列入什麼？",
+        [
+          "交通規則",
+          "學校社團",
+          "世界遺產",
+          "暑假作業"
+        ],
+        2,
+        "第6段寫到，建了一百四十多年的聖家堂，未完工就被列入世界遺產。",
+        "6"
+      ]
+    ]
+  },
+  {
+    "id": 8,
+    "title": "嘗嘗我的家鄉味",
+    "questions": [
+      [
+        "第一段家鄉味中，米飯戴上了什麼？",
+        [
+          "魚蝦螺貝和鮭魚子",
+          "白糖霜",
+          "大白菜",
+          "熱湯"
+        ],
+        0,
+        "第1段提到，米飯戴上魚蝦螺貝，還有鮭魚子。",
+        "1"
+      ],
+      [
+        "第一段中，一入口時什麼在嘴巴中漫開？",
+        [
+          "山谷",
+          "森林",
+          "海洋",
+          "書本"
+        ],
+        2,
+        "第1段寫到，一入口，海洋在嘴巴中漫開。",
+        "1"
+      ],
+      [
+        "第一段中有時什麼會衝進鼻子裡？",
+        [
+          "辣椒油",
+          "糖霜",
+          "鹽巴",
+          "山葵"
+        ],
+        3,
+        "第1段提到，有時山葵還會跟著衝進鼻子裡。",
+        "1"
+      ],
+      [
+        "第二段中，青菜和肉塊洗了一場什麼澡？",
+        [
+          "冰冷的海水澡",
+          "熱熱濃濃稠稠的香料澡",
+          "清水澡",
+          "牛奶澡"
+        ],
+        1,
+        "第2段寫到，青菜和肉塊洗一場熱熱的濃濃稠稠的香料澡。",
+        "2"
+      ],
+      [
+        "第二段中搭配的是什麼柔美的旋律？",
+        [
+          "酸奶油",
+          "藍眼淚",
+          "桂花",
+          "蘋果"
+        ],
+        0,
+        "第2段提到，搭配酸奶油柔美的旋律。",
+        "2"
+      ],
+      [
+        "第三段中，軟軟的麵團們原本正在做什麼？",
+        [
+          "寫信",
+          "跑步比賽",
+          "踢毽子",
+          "呼著氣睡得香甜"
+        ],
+        3,
+        "第3段寫到，軟軟的麵團們正呼著氣睡得香甜。",
+        "3"
+      ],
+      [
+        "第三段中，麵團被甩成什麼形狀？",
+        [
+          "方方正正的",
+          "細細長長的",
+          "大大的圓圓扁扁的",
+          "尖尖小小的"
+        ],
+        2,
+        "第3段提到，身體變成大大的圓圓扁扁的。",
+        "3"
+      ],
+      [
+        "第三段中，麵團在哪裡劈里啪啦地發火？",
+        [
+          "海邊",
+          "窯裡",
+          "教室",
+          "公路"
+        ],
+        1,
+        "第3段寫到，麵團在窯裡劈里啪啦地發火。",
+        "3"
+      ],
+      [
+        "第四段中，圓滾滾的大白菜在哪裡玩遊戲？",
+        [
+          "森林裡",
+          "操場上",
+          "大缸裡",
+          "車站裡"
+        ],
+        2,
+        "第4段提到，大白菜呼朋引伴在大缸裡玩遊戲。",
+        "4"
+      ],
+      [
+        "第四段中，大白菜先和什麼來個暖身操？",
+        [
+          "酸奶油",
+          "鮭魚子",
+          "白糖霜",
+          "鹽巴"
+        ],
+        3,
+        "第4段寫到，先和鹽巴來個暖身操。",
+        "4"
+      ]
+    ]
+  },
+  {
+    "id": 9,
+    "title": "小小力量將世界照亮",
+    "questions": [
+      [
+        "哪一個影展上的紀錄片感動許多觀眾？",
+        [
+          "金馬影展",
+          "臺灣國際兒童影展",
+          "科學展覽",
+          "運動會"
+        ],
+        1,
+        "第1段提到，臺灣國際兒童影展上的一部紀錄片感動許多觀眾。",
+        "1"
+      ],
+      [
+        "電影中的小主角用哪些方式幫助世人？",
+        [
+          "安裝冷氣、清掃地板、修車",
+          "參加路跑、買玩具、看電影",
+          "成立兒童環保銀行、資助街友、發行報紙",
+          "種稻米、拍球、踢毽子"
+        ],
+        2,
+        "第1段寫到，小主角們藉由成立兒童環保銀行、資助街友、發行兒童之聲報紙等方式幫助世人。",
+        "1"
+      ],
+      [
+        "南郭國小的三位女孩當時是幾年級？",
+        [
+          "二年級",
+          "六年級",
+          "五年級",
+          "四年級"
+        ],
+        3,
+        "第2段提到，彰化南郭國小的三位四年級女孩。",
+        "2"
+      ],
+      [
+        "女孩們在什麼課程結束後實地探訪移工？",
+        [
+          "認識移工",
+          "認識海洋",
+          "作文課",
+          "英語課"
+        ],
+        0,
+        "第2段寫到，她們在「認識移工」課程結束後探訪移工。",
+        "2"
+      ],
+      [
+        "移工在購買火車票時遇到什麼困難？",
+        [
+          "找不到公園",
+          "錢太多",
+          "語言不通",
+          "天氣太熱"
+        ],
+        2,
+        "第2段提到，移工在購買火車票時飽受語言不通之苦。",
+        "2"
+      ],
+      [
+        "女孩們促成彰化車站加設哪四國語言的購票說明？",
+        [
+          "動物語言",
+          "歐洲四國語言",
+          "古代文字",
+          "東南亞四國語言"
+        ],
+        3,
+        "第2段寫到，最後促成彰化車站加設東南亞四國語言的購票說明。",
+        "2"
+      ],
+      [
+        "加拿大的萊恩幾歲時做了改變許多人命運的事？",
+        [
+          "十歲",
+          "六歲",
+          "十五歲",
+          "二十歲"
+        ],
+        1,
+        "第3段提到，加拿大的萊恩六歲那一年做了一件改變許多人命運的事。",
+        "3"
+      ],
+      [
+        "老師分享非洲部分國家的人因為缺少什麼而死亡？",
+        [
+          "乾淨的水",
+          "玩具",
+          "電視",
+          "書包"
+        ],
+        0,
+        "第3段寫到，許多人因為沒有乾淨的水喝而死亡。",
+        "3"
+      ],
+      [
+        "小萊恩一開始累積的捐款是多少加幣？",
+        [
+          "五元",
+          "兩千元",
+          "一萬元",
+          "七十元"
+        ],
+        3,
+        "第3段提到，最後累積加幣七十元。",
+        "3"
+      ],
+      [
+        "萊恩後來創立了什麼基金會？",
+        [
+          "高第建築基金會",
+          "幸福筆記本基金會",
+          "萊恩之井基金會",
+          "護蟹基金會"
+        ],
+        2,
+        "第4段寫到，萊恩創立的萊恩之井基金會仍努力著。",
+        "4"
+      ]
+    ]
+  },
+  {
+    "id": 10,
+    "title": "男生說，女生說",
+    "questions": [
+      [
+        "彤彤寫信給誰求助？",
+        [
+          "同學",
+          "老師",
+          "外公",
+          "母親"
+        ],
+        2,
+        "第1段開頭寫著「親愛的外公」，可知彤彤寫信給外公。",
+        "1"
+      ],
+      [
+        "彤彤說班上幾個男生喜歡跟她們怎樣？",
+        [
+          "一起旅行",
+          "一起讀書",
+          "一起煮湯",
+          "唱反調"
+        ],
+        3,
+        "第1段提到，班上有幾個男生總是喜歡跟她們唱反調。",
+        "1"
+      ],
+      [
+        "外公認為彤彤把男生、女生分得像什麼？",
+        [
+          "兩個敵對的陣營",
+          "兩本筆記本",
+          "兩座海島",
+          "兩隻螃蟹"
+        ],
+        0,
+        "第2段寫到，外公覺得彤彤把男生、女生分得像兩個敵對的陣營。",
+        "2"
+      ],
+      [
+        "外公認為大家是什麼關係？",
+        [
+          "店員和顧客",
+          "陌生人",
+          "同班同學",
+          "師傅和助手"
+        ],
+        2,
+        "第2段提到，外公認為你們就是「同班同學」的關係。",
+        "2"
+      ],
+      [
+        "同學功課不會時，大家會做什麼？",
+        [
+          "叫他回家",
+          "取笑他",
+          "不理他",
+          "去幫他"
+        ],
+        3,
+        "第3段寫到，有同學功課不會，大家就去幫他。",
+        "3"
+      ],
+      [
+        "同學生病時，大家放學後帶什麼去慰問？",
+        [
+          "一條錶鍊",
+          "兩顆蘋果",
+          "一本筆記本",
+          "一隻蜥蜴"
+        ],
+        1,
+        "第3段提到，大家帶著兩顆蘋果結伴去慰問。",
+        "3"
+      ],
+      [
+        "彤彤的母親讀國中時，常和同學討論什麼？",
+        [
+          "功課和升學問題",
+          "停車技巧",
+          "火山活動",
+          "螃蟹繁殖"
+        ],
+        0,
+        "第4段寫到，她母親常和同學討論功課，甚至升學問題。",
+        "4"
+      ],
+      [
+        "有一次彤彤的母親邀同學到家裡做什麼？",
+        [
+          "買火車票",
+          "安裝冷氣",
+          "寫報紙",
+          "做菜聚餐"
+        ],
+        3,
+        "第5段提到，她母親邀同學到家裡來做菜聚餐。",
+        "5"
+      ],
+      [
+        "外公讀小學六年級時，有同學請大家吃什麼？",
+        [
+          "一顆蘋果",
+          "一杯牛奶",
+          "一碗麵",
+          "一盤壽司"
+        ],
+        2,
+        "第7段寫到，她的母親請每個人吃了一碗麵。",
+        "7"
+      ],
+      [
+        "外公最後建議不要區分什麼？",
+        [
+          "山和海",
+          "男生、女生",
+          "冷和熱",
+          "早和晚"
+        ],
+        1,
+        "第8段寫到，不要區分什麼男生、女生。",
+        "8"
+      ]
+    ]
+  },
+  {
+    "id": 11,
+    "title": "耶誕禮物",
+    "questions": [
+      [
+        "耶誕節要到了，黛拉想買禮物送給誰？",
+        [
+          "蘇菲夫人",
+          "外公",
+          "老師",
+          "丈夫吉姆"
+        ],
+        3,
+        "第1段提到，黛拉想買一件好禮物送給丈夫。",
+        "1"
+      ],
+      [
+        "黛拉一開始全身上下只有多少錢？",
+        [
+          "一元八角七分",
+          "二十元",
+          "七十元",
+          "兩千元"
+        ],
+        0,
+        "第1段寫到，她全身上下只有一元八角七分。",
+        "1"
+      ],
+      [
+        "吉姆工作努力，但收入怎麼樣？",
+        [
+          "完全沒有",
+          "非常多",
+          "很微薄",
+          "每天增加"
+        ],
+        2,
+        "第2段提到，吉姆工作努力，收入卻很微薄。",
+        "2"
+      ],
+      [
+        "黛拉和吉姆擁有的一項傲人財富是什麼？",
+        [
+          "牛奶海",
+          "大房子",
+          "汽車",
+          "黛拉的長髮"
+        ],
+        3,
+        "第3段寫到，美麗的長髮是她和吉姆引以為傲的財富之一。",
+        "3"
+      ],
+      [
+        "吉姆最得意的寶貝是什麼？",
+        [
+          "一組梳子",
+          "祖父傳給他的金錶",
+          "白金短錶鍊",
+          "一碗麵"
+        ],
+        1,
+        "第5段提到，祖父傳給他的金錶是吉姆最得意的寶貝。",
+        "5"
+      ],
+      [
+        "黛拉到哪一家店賣頭髮？",
+        [
+          "蘇菲夫人假髮店",
+          "百貨公司",
+          "火車站",
+          "麵店"
+        ],
+        0,
+        "第7段寫到，黛拉來到蘇菲夫人假髮店。",
+        "7"
+      ],
+      [
+        "蘇菲夫人用多少錢買黛拉的頭髮？",
+        [
+          "兩千元",
+          "一元",
+          "七十元",
+          "二十元"
+        ],
+        3,
+        "第8段提到，蘇菲夫人說：「二十元！」",
+        "8"
+      ],
+      [
+        "黛拉在百貨公司的鐘錶部買到什麼？",
+        [
+          "金錶",
+          "一組梳子",
+          "白金短錶鍊",
+          "熱湯"
+        ],
+        2,
+        "第12段寫到，她買到一條漂亮的白金短錶鍊。",
+        "12"
+      ],
+      [
+        "吉姆賣掉金錶買了什麼給黛拉？",
+        [
+          "一條錶鍊",
+          "一組梳子",
+          "一支筆",
+          "一本書"
+        ],
+        1,
+        "第20段提到，吉姆把金錶賣了，買了黛拉最喜歡的一組梳子。",
+        "20"
+      ],
+      [
+        "吉姆認為今年是怎樣的耶誕節？",
+        [
+          "最普通的星期天",
+          "最難過的耶誕節",
+          "最快樂的耶誕節",
+          "最可怕的夜晚"
+        ],
+        2,
+        "第25段最後寫到，今年真是最快樂的耶誕節。",
+        "25"
+      ]
+    ]
+  },
+  {
+    "id": 12,
+    "title": "漫遊詩情",
+    "questions": [
+      [
+        "〈鳥鳴澗〉的作者是誰？",
+        [
+          "王維",
+          "李白",
+          "林良",
+          "劉軒"
+        ],
+        0,
+        "〈鳥鳴澗〉標題後標示作者為王維。",
+        "鳥鳴澗"
+      ],
+      [
+        "〈鳥鳴澗〉中「人閒」後面接哪一句？",
+        [
+          "輕舟已過萬重山",
+          "白帝彩雲間",
+          "桂花落",
+          "兩岸猿聲啼不住"
+        ],
+        2,
+        "詩句寫作「人閒桂花落」。",
+        "鳥鳴澗"
+      ],
+      [
+        "〈鳥鳴澗〉中月亮出來時驚動了什麼？",
+        [
+          "大蜥蜴",
+          "螃蟹",
+          "孔雀",
+          "山鳥"
+        ],
+        3,
+        "詩句「月出驚山鳥」說明月亮出來驚動山鳥。",
+        "鳥鳴澗"
+      ],
+      [
+        "〈鳥鳴澗〉的語譯中，鳥鳴在哪裡繚繞？",
+        [
+          "熱鬧的車站",
+          "春夜的山澗溪谷中",
+          "海邊公路",
+          "百貨公司"
+        ],
+        1,
+        "語譯提到，鳥鳴在春夜的山澗溪谷中繚繞。",
+        "鳥鳴澗語譯"
+      ],
+      [
+        "〈鳥鳴澗〉賞析說這首詩描寫什麼景色？",
+        [
+          "春山靜夜的景色",
+          "夏天海灘",
+          "城市街道",
+          "冬天雪地"
+        ],
+        0,
+        "賞析第一句說，本詩描寫春山靜夜的景色。",
+        "鳥鳴澗賞析"
+      ],
+      [
+        "〈早發白帝城〉的作者是誰？",
+        [
+          "琦君",
+          "王維",
+          "歐亨利",
+          "李白"
+        ],
+        3,
+        "〈早發白帝城〉標題後標示作者為李白。",
+        "早發白帝城"
+      ],
+      [
+        "〈早發白帝城〉中，詩人一早告別哪裡？",
+        [
+          "龜山島",
+          "江陵",
+          "白帝城",
+          "西莒島"
+        ],
+        2,
+        "詩句「朝辭白帝彩雲間」表示一早告別白帝城。",
+        "早發白帝城"
+      ],
+      [
+        "〈早發白帝城〉中，一日可到達哪裡？",
+        [
+          "巴塞隆納",
+          "江陵",
+          "墾丁",
+          "池上"
+        ],
+        1,
+        "詩句「千里江陵一日還」提到一日到達江陵。",
+        "早發白帝城"
+      ],
+      [
+        "〈早發白帝城〉中，兩岸什麼聲音啼不住？",
+        [
+          "車聲",
+          "鳥聲",
+          "猿聲",
+          "鐘聲"
+        ],
+        2,
+        "詩句「兩岸猿聲啼不住」說明是猿聲啼不停。",
+        "早發白帝城"
+      ],
+      [
+        "〈早發白帝城〉賞析說，全詩沒有哪個字，卻能表達水急船輕？",
+        [
+          "遠",
+          "慢",
+          "高",
+          "快"
+        ],
+        3,
+        "賞析提到，全詩沒有「快」字，卻能表達水急船輕的情景。",
+        "早發白帝城賞析"
+      ]
+    ]
+  }
+];
+
+let currentRole = null;
+let currentStudent = null;
+let currentLesson = null;
+let currentQuestions = [];
+let currentIndex = 0;
+let answers = {};
+let quizStartTime = null;
+let reviewMode = false;
+let reviewOriginalIndexes = [];
+let selectedStudentForTeacher = null;
+let records = loadLocal();
+let remoteReady = false;
+let unsubscribeRemote = null;
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDYfPwwWuAVEURZkj1E37zP-UPeg_sXZQo",
+  authDomain: "m-n5a-1440e.firebaseapp.com",
+  projectId: "m-n5a-1440e",
+  storageBucket: "m-n5a-1440e.firebasestorage.app",
+  messagingSenderId: "30680098159",
+  appId: "1:30680098159:web:9ba48cea0095e301b5b49a"
+};
+const FIREBASE_RECORD_DOC = "potentialClassAChineseSummerHomework";
+
+const app = document.getElementById("app");
+
+function defaultRecords(){
+  const base = { students: {} };
+  Object.keys(students).forEach(name => {
+    base.students[name] = { logins: [], lessons: {} };
+  });
+  return base;
+}
+
+function mergeDefaults(data){
+  const base = defaultRecords();
+  if(!data || typeof data !== "object") return base;
+  Object.keys(base.students).forEach(name => {
+    const old = data.students?.[name] || {};
+    base.students[name] = {
+      logins: Array.isArray(old.logins) ? old.logins : [],
+      lessons: old.lessons || {}
+    };
+  });
+  return base;
+}
+
+function loadLocal(){
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return mergeDefaults(raw ? JSON.parse(raw) : null);
+  } catch(e) {
+    return defaultRecords();
+  }
+}
+
+function saveLocal(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+}
+
+async function saveRecords(){
+  saveLocal();
+  if(remoteReady && window.__saveRemoteRecords) {
+    try { await window.__saveRemoteRecords(records); } catch(e) { console.warn("remote save failed", e); }
+  }
+}
+
+function nowText(){
+  return new Date().toLocaleString("zh-TW", {hour12:false});
+}
+
+function escapeHtml(str){
+  return String(str ?? "").replace(/[&<>"']/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[s]));
+}
+
+function speak(text){
+  if(!("speechSynthesis" in window)) {
+    alert("此瀏覽器不支援語音報讀。");
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(String(text));
+  const settings = getSpeechSettings();
+  const voices = speechSynthesis.getVoices();
+  const voice = voices.find(v => v.name === settings.voiceName);
+  if(voice) u.voice = voice;
+  u.lang = "zh-TW";
+  u.rate = Number(settings.rate || 1);
+  speechSynthesis.speak(u);
+}
+
+function getSpeechSettings(){
+  try {
+    return JSON.parse(localStorage.getItem("g5_speech_settings") || "{}");
+  } catch(e) {
+    return {};
+  }
+}
+
+function setSpeechSettings(settings){
+  localStorage.setItem("g5_speech_settings", JSON.stringify(settings));
+}
+
+window.openSettings = function(){
+  document.getElementById("cover").classList.add("show");
+  document.getElementById("settingsPanel").classList.add("open");
+  populateVoices();
+};
+window.closeSettings = function(){
+  document.getElementById("cover").classList.remove("show");
+  document.getElementById("settingsPanel").classList.remove("open");
+};
+window.testVoice = function(){
+  speak("這是報讀測試。請選擇最適合自己的語音和語速。");
+};
+
+function populateVoices(){
+  const select = document.getElementById("voiceSelect");
+  const rate = document.getElementById("rateRange");
+  const label = document.getElementById("rateLabel");
+  const settings = getSpeechSettings();
+  const voices = speechSynthesis.getVoices().filter(v => v.lang.includes("zh") || v.lang.includes("en") || v.lang.includes("ja"));
+  select.innerHTML = voices.map(v => `<option value="${escapeHtml(v.name)}">${escapeHtml(v.name)}（${escapeHtml(v.lang)}）</option>`).join("");
+  if(settings.voiceName) select.value = settings.voiceName;
+  rate.value = settings.rate || 1;
+  label.textContent = `${rate.value}x`;
+  select.onchange = () => setSpeechSettings({...getSpeechSettings(), voiceName: select.value, rate: rate.value});
+  rate.oninput = () => {
+    label.textContent = `${rate.value}x`;
+    setSpeechSettings({...getSpeechSettings(), voiceName: select.value, rate: rate.value});
+  };
+}
+if("speechSynthesis" in window) {
+  speechSynthesis.onvoiceschanged = populateVoices;
+}
+
+function ttsButton(text, label="🔊"){
+  return `<button class="tts small" type="button" onclick='speak(${JSON.stringify(text)})' title="報讀">${label}</button>`;
+}
+window.speak = speak;
+
+window.togglePassword = function(inputId, btn){
+  const input = document.getElementById(inputId);
+  if(!input) return;
+  const show = input.type === "password";
+  input.type = show ? "text" : "password";
+  if(btn) btn.textContent = show ? "隱藏" : "顯示";
+};
+
+function renderLogin(){
+  currentRole = null; currentStudent = null; selectedStudentForTeacher = null;
+  app.innerHTML = `
+    <section class="card login-box">
+      <h2>請選擇登入身分</h2>
+      <div class="role-buttons">
+        <button class="role-btn" onclick="renderStudentSelect()">🌟 學生登入<span class="sub">點我開始作答</span></button>
+        <button class="role-btn ghost" onclick="renderTeacherLogin()">🍎 教師登入<span class="sub">查看學習紀錄</span></button>
+      </div>
+      <p style="text-align:center;"><span id="syncBadge" class="sync">連線中</span></p>
+    </section>
+  `;
+  updateSyncBadge();
+}
+
+function updateSyncBadge(){
+  const el = document.getElementById("syncBadge");
+  if(el) {
+    el.textContent = remoteReady ? "雲端同步已啟用" : "本機暫存";
+    el.classList.toggle("on", remoteReady);
+  }
+}
+
+window.renderTeacherLogin = function(){
+  app.innerHTML = `
+    <section class="card login-box">
+      <button class="ghost small" onclick="renderLogin()">← 返回</button>
+      <h2>🍎 教師端登入</h2>
+      <div class="row">
+        <input id="teacherPass" type="password" placeholder="請輸入教師密碼" style="flex:1;min-width:220px;" />
+        <button class="ghost small" type="button" onclick="togglePassword('teacherPass', this)">顯示</button>
+      </div>
+      <button onclick="teacherLogin()">登入教師端</button>
+    </section>
+  `;
+};
+
+window.teacherLogin = function(){
+  const pass = document.getElementById("teacherPass").value.trim();
+  if(pass !== TEACHER_PASSWORD) return alert("教師密碼錯誤");
+  currentRole = "teacher";
+  renderTeacherDashboard();
+};
+
+window.renderStudentSelect = function(){
+  app.innerHTML = `
+    <section class="card login-box">
+      <button class="ghost small" onclick="renderLogin()">← 返回</button>
+      <h2>🌟 學生端登入</h2>
+      <p class="muted" style="text-align:center;font-size:17px;">請點選自己的姓名後輸入密碼。</p>
+      <div class="grid">
+        ${Object.keys(students).map(name => `<div class="student-btn" onclick='renderStudentLogin(${JSON.stringify(name)})'>${escapeHtml(name)}</div>`).join("")}
+      </div>
+    </section>
+  `;
+};
+
+window.renderStudentLogin = function(name){
+  app.innerHTML = `
+    <section class="card login-box">
+      <button class="ghost small" onclick="renderStudentSelect()">← 返回學生名單</button>
+      <h2>🌼 ${escapeHtml(name)} 登入</h2>
+      <div class="row">
+        <input id="studentPass" type="password" placeholder="請輸入密碼" style="flex:1;min-width:220px;" />
+        <button class="ghost small" type="button" onclick="togglePassword('studentPass', this)">顯示</button>
+      </div>
+      <button class="good" onclick='studentLogin(${JSON.stringify(name)})'>登入</button>
+    </section>
+  `;
+};
+
+window.studentLogin = async function(name){
+  const pass = document.getElementById("studentPass").value.trim();
+  if(pass !== students[name]) return alert("學生密碼錯誤");
+  currentRole = "student";
+  currentStudent = name;
+  records.students[name] ||= { logins: [], lessons: {} };
+  records.students[name].logins.push({ time: nowText() });
+  await saveRecords();
+  renderStudentHome();
+};
+
+function getLessonRecord(name, lessonId){
+  const stu = records.students[name] ||= {logins:[], lessons:{}};
+  stu.lessons[lessonId] ||= { highScore: null, passed: false, attempts: [] };
+  return stu.lessons[lessonId];
+}
+
+window.renderStudentHome = function(){
+  app.innerHTML = `
+    <div class="top-fixed">
+      <div class="row space">
+        <div>
+          <strong>學生：</strong>${escapeHtml(currentStudent)}
+          <span class="muted">｜100分才通過</span>
+        </div>
+        <div class="row">
+          <button class="ghost small" onclick="openSettings()">⚙️ 報讀設定</button>
+          <button class="secondary small" onclick="renderLogin()">登出</button>
+        </div>
+      </div>
+    </div>
+    <section class="card">
+      <h2>請選擇課次</h2>
+      <div class="grid">
+        ${lessonsData.map(lesson => {
+          const rec = getLessonRecord(currentStudent, lesson.id);
+          const scoreText = rec.highScore === null ? "尚未作答" : `最高分：${rec.highScore}`;
+          const cls = rec.passed ? "score-pass" : (rec.highScore === null ? "" : "score-fail");
+          return `<div class="lesson-card">
+            <h3>${lesson.id}. ${escapeHtml(lesson.title)}</h3>
+            <span class="score-pill ${cls}">${rec.passed ? "已通過 100分" : scoreText}</span>
+            <p class="muted">作答次數：${rec.attempts.length}</p>
+            <button onclick="startLesson(${lesson.id})">開始作答</button>
+          </div>`;
+        }).join("")}
+      </div>
+    </section>
+  `;
+};
+
+window.startLesson = function(lessonId){
+  currentLesson = lessonsData.find(l => l.id === lessonId);
+  if(!currentLesson || !Array.isArray(currentLesson.questions) || currentLesson.questions.length === 0){
+    alert("這一課題目尚未準備完成，請通知老師。");
+    return;
+  }
+  currentQuestions = currentLesson.questions.map((q, idx) => ({...q, originalIndex: idx}));
+  currentIndex = 0; answers = {}; reviewMode = false; reviewOriginalIndexes = [];
+  quizStartTime = nowText();
+  renderQuestion();
+};
+
+function optionLetter(i){ return ["A","B","C","D"][i] || String(i+1); }
+
+window.renderQuestion = function(){
+  const q = currentQuestions[currentIndex];
+  const percent = Math.round(((currentIndex+1)/currentQuestions.length)*100);
+  const selected = answers[currentIndex];
+  app.innerHTML = `
+    <div class="top-fixed">
+      <div class="row space">
+        <div><strong>${currentLesson.id}. ${escapeHtml(currentLesson.title)}</strong> ｜ ${reviewMode ? "錯題回顧" : "正式作答"}</div>
+        <div class="row">
+          <button class="ghost small" onclick="openSettings()">⚙️ 報讀設定</button>
+          <button class="secondary small" onclick="renderStudentHome()">回課次</button>
+        </div>
+      </div>
+      <div class="progress"><div style="width:${percent}%"></div></div>
+      <div class="muted">第 ${currentIndex+1} / ${currentQuestions.length} 題</div>
+    </div>
+    <section class="card">
+      <div class="qbox">
+        <div class="row space">
+          <h2>題目</h2>
+          ${ttsButton(q.question, "🔊聽題目")}
+        </div>
+        <p style="font-size:22px;font-weight:800;">${escapeHtml(q.question)}</p>
+      </div>
+      <div style="margin-top:16px;">
+        ${q.options.map((opt,i)=>`
+          <div class="option ${selected===i ? "selected" : ""}" onclick="selectAnswer(${i})">
+            <span class="letter">${optionLetter(i)}</span>
+            <span style="flex:1;font-size:19px;">${escapeHtml(opt)}</span>
+            ${ttsButton(`${optionLetter(i)}、${opt}`)}
+          </div>
+        `).join("")}
+      </div>
+      <div class="row space" style="margin-top:18px;">
+        <button class="secondary" onclick="prevQuestion()" ${currentIndex===0?"disabled":""}>上一題</button>
+        <div class="row">
+          <button onclick="nextQuestion()" ${currentIndex===currentQuestions.length-1?"disabled":""}>下一題</button>
+          <button class="good" onclick="submitQuiz()">交卷</button>
+        </div>
+      </div>
+      <p class="muted">提醒：每題都可點選喇叭報讀；交卷後可看分數、錯題與詳答。</p>
+    </section>
+  `;
+};
+
+window.selectAnswer = function(i){ answers[currentIndex]=i; renderQuestion(); };
+window.prevQuestion = function(){ if(currentIndex>0){currentIndex--; renderQuestion();} };
+window.nextQuestion = function(){ if(currentIndex<currentQuestions.length-1){currentIndex++; renderQuestion();} };
+
+window.submitQuiz = async function(){
+  const unanswered = currentQuestions.map((_,i)=>i).filter(i => answers[i] === undefined);
+  if(unanswered.length && !confirm(`尚有 ${unanswered.length} 題未作答，確定要交卷嗎？`)) return;
+
+  let correct = 0;
+  const wrongs = [];
+  currentQuestions.forEach((q,i) => {
+    const chosen = answers[i];
+    const ok = chosen === q.answer;
+    if(ok) correct++;
+    else wrongs.push({
+      originalIndex: q.originalIndex,
+      question: q.question,
+      options: q.options,
+      answer: q.answer,
+      chosen: chosen,
+      explanation: q.explanation,
+      paragraph: q.paragraph
+    });
+  });
+  const score = Math.round((correct/currentQuestions.length)*100);
+  const lessonRec = getLessonRecord(currentStudent, currentLesson.id);
+  const effectiveScore = (reviewMode && wrongs.length===0) ? 100 : score;
+  if(!reviewMode) {
+    lessonRec.highScore = lessonRec.highScore === null ? score : Math.max(lessonRec.highScore, score);
+    lessonRec.passed = lessonRec.passed || score === 100;
+  } else {
+    if(wrongs.length === 0) {
+      lessonRec.highScore = 100;
+      lessonRec.passed = true;
+    }
+  }
+  lessonRec.attempts.push({
+    mode: reviewMode ? "錯題回顧" : "完整作答",
+    startedAt: quizStartTime,
+    submittedAt: nowText(),
+    score,
+    effectiveScore,
+    totalQuestions: currentQuestions.length,
+    correct,
+    wrongs
+  });
+  await saveRecords();
+  renderResult(score, wrongs);
+};
+
+function renderResult(score, wrongs){
+  const passed = (!reviewMode && score === 100) || (reviewMode && wrongs.length===0);
+  app.innerHTML = `
+    <section class="card">
+      <div class="${passed ? "notice ok" : "notice bad-note"}">
+        <h2 style="margin-top:0;">${passed ? "恭喜通過！" : "尚未通過，請進行錯題回顧"}</h2>
+        <p style="font-size:24px;font-weight:900;">本次得分：${score} 分</p>
+        <p>${passed ? "本課已達100分通過標準。" : "本課需100分才通過，可以先看錯題與詳答，再重新作答錯題。"}</p>
+      </div>
+      <div class="row" style="margin-top:16px;">
+        ${wrongs.length ? `<button class="warn" onclick="startWrongReview()">錯題回顧重新作答</button>` : ""}
+        <button onclick="renderStudentHome()">回課次選單</button>
+      </div>
+    </section>
+    <section class="card">
+      <h2>作答詳答</h2>
+      ${currentQuestions.map((q,i)=>{
+        const chosen = answers[i];
+        const ok = chosen === q.answer;
+        const expText = `【第${q.paragraph}段】${q.explanation}`;
+        return `
+          <details open>
+            <summary>第 ${i+1} 題：${ok ? "答對" : "答錯"}</summary>
+            <p><strong>題目：</strong>${escapeHtml(q.question)} ${ttsButton(q.question)}</p>
+            <p><strong>你的答案：</strong>${chosen===undefined ? "未作答" : escapeHtml(optionLetter(chosen)+"、"+q.options[chosen])}</p>
+            <p><strong>正確答案：</strong>${optionLetter(q.answer)}、${escapeHtml(q.options[q.answer])}</p>
+            <div class="explain">
+              <div class="row space">
+                <strong>詳答</strong>
+                ${ttsButton(expText, "🔊聽詳答")}
+              </div>
+              <p>${escapeHtml(expText)}</p>
+            </div>
+          </details>
+        `;
+      }).join("")}
+    </section>
+  `;
+}
+
+window.startWrongReview = function(){
+  const wrongQs = currentQuestions
+    .map((q,i)=>({q, i}))
+    .filter(item => answers[item.i] !== item.q.answer)
+    .map(item => item.q);
+  if(!wrongQs.length) return alert("沒有錯題可以回顧。");
+  currentQuestions = wrongQs;
+  currentIndex = 0; answers = {}; reviewMode = true; quizStartTime = nowText();
+  renderQuestion();
+};
+
+window.renderTeacherDashboard = function(){
+  currentRole = "teacher";
+  const rows = Object.keys(students).map(name => {
+    const stu = records.students[name] || {logins:[],lessons:{}};
+    const lastLogin = stu.logins.length ? stu.logins[stu.logins.length-1].time : "尚未登入";
+    let totalAttempts = 0;
+    const passedCount = lessonsData.filter(l => {
+      const rec = stu.lessons?.[l.id];
+      totalAttempts += rec?.attempts?.length || 0;
+      return rec?.passed;
+    }).length;
+    return `<tr>
+      <td><strong>${escapeHtml(name)}</strong></td>
+      <td>${escapeHtml(lastLogin)}</td>
+      <td>${totalAttempts}</td>
+      <td>${passedCount} / 12</td>
+      <td><button class="small" onclick='renderTeacherStudent(${JSON.stringify(name)})'>查看詳細紀錄</button></td>
+    </tr>`;
+  }).join("");
+  app.innerHTML = `
+    <div class="top-fixed">
+      <div class="row space">
+        <h2 style="margin:0;">教師管理介面</h2>
+        <div class="row">
+          <button class="ghost small" onclick="renderTeacherDashboard()">重新整理</button>
+          <button class="warn small" onclick="exportRecords()">匯出紀錄JSON</button>
+          <button class="bad small" onclick="clearAllRecords()">清除本機紀錄</button>
+          <button class="secondary small" onclick="renderLogin()">登出</button>
+        </div>
+      </div>
+    </div>
+    <section class="card">
+      <p class="muted">教師端不提供報讀功能；學生端題目、選項與詳答才有報讀按鈕。</p>
+      <table>
+        <thead><tr><th>學生</th><th>最後登入時間</th><th>總作答次數</th><th>通過課數</th><th>操作</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </section>
+  `;
+};
+
+window.renderTeacherStudent = function(name){
+  selectedStudentForTeacher = name;
+  const stu = records.students[name] || {logins:[],lessons:{}};
+  const loginList = stu.logins.length ? stu.logins.slice().reverse().map(x=>`<li>${escapeHtml(x.time)}</li>`).join("") : "<li>尚無登入紀錄</li>";
+  const lessonBlocks = lessonsData.map(lesson => {
+    const rec = stu.lessons?.[lesson.id] || {highScore:null,passed:false,attempts:[]};
+    return `<details>
+      <summary>${lesson.id}. ${escapeHtml(lesson.title)}｜最高分：${rec.highScore===null?"尚未作答":rec.highScore}｜作答次數：${rec.attempts.length}｜${rec.passed?"已通過":"未通過"}</summary>
+      ${rec.attempts.length ? rec.attempts.map((a,idx)=>`
+        <div class="card" style="box-shadow:none;margin:12px 0;background:#f8fafc;">
+          <p><strong>第 ${idx+1} 次</strong>｜模式：${escapeHtml(a.mode)}｜開始：${escapeHtml(a.startedAt)}｜交卷：${escapeHtml(a.submittedAt)}｜分數：${a.score}</p>
+          <p>答對：${a.correct} / ${a.totalQuestions}｜錯題數：${a.wrongs.length}</p>
+          ${a.wrongs.length ? `<table>
+            <thead><tr><th>題目</th><th>學生答案</th><th>正確答案</th><th>段落與詳解</th></tr></thead>
+            <tbody>
+              ${a.wrongs.map(w => `
+                <tr>
+                  <td>${escapeHtml(w.question)}</td>
+                  <td>${w.chosen===undefined ? "未作答" : escapeHtml(optionLetter(w.chosen)+"、"+w.options[w.chosen])}</td>
+                  <td>${escapeHtml(optionLetter(w.answer)+"、"+w.options[w.answer])}</td>
+                  <td>${escapeHtml("【第"+w.paragraph+"段】"+w.explanation)}</td>
+                </tr>`).join("")}
+            </tbody>
+          </table>` : `<p class="notice ok">本次沒有錯題。</p>`}
+        </div>
+      `).join("") : `<p class="muted">尚無作答紀錄。</p>`}
+    </details>`;
+  }).join("");
+  app.innerHTML = `
+    <div class="top-fixed">
+      <div class="row space">
+        <h2 style="margin:0;">${escapeHtml(name)} 詳細紀錄</h2>
+        <button class="secondary small" onclick="renderTeacherDashboard()">← 回教師總覽</button>
+      </div>
+    </div>
+    <section class="card">
+      <h3>登入紀錄</h3>
+      <ol>${loginList}</ol>
+    </section>
+    <section class="card">
+      <h3>各課成績與每次錯題</h3>
+      ${lessonBlocks}
+    </section>
+  `;
+};
+
+window.exportRecords = function(){
+  const blob = new Blob([JSON.stringify(records,null,2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "潛能班國A組暑假作業紀錄.json";
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+window.clearAllRecords = async function(){
+  if(!confirm("確定要清除本機紀錄嗎？若雲端同步啟用，重新載入可能仍會抓回雲端資料。")) return;
+  records = defaultRecords();
+  await saveRecords();
+  renderTeacherDashboard();
+};
+
+// Firebase cloud storage
+async function initOptionalFirebase(){
+  try {
+    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+    const { getFirestore, doc, setDoc, onSnapshot, getDoc } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+    const fbApp = initializeApp(firebaseConfig);
+    const db = getFirestore(fbApp);
+    const ref = doc(db, "homeworkRecords", FIREBASE_RECORD_DOC);
+
+    window.__saveRemoteRecords = async (data) => {
+      await setDoc(ref, { payload: data, updatedAt: new Date().toISOString() }, { merge: true });
+    };
+
+    const snap = await getDoc(ref);
+    if(snap.exists() && snap.data().payload) {
+      records = mergeDefaults(snap.data().payload);
+      saveLocal();
+    } else {
+      await window.__saveRemoteRecords(records);
+    }
+
+    unsubscribeRemote = onSnapshot(ref, (s) => {
+      if(s.exists() && s.data().payload) {
+        records = mergeDefaults(s.data().payload);
+        saveLocal();
+        if(currentRole === "teacher") {
+          if(selectedStudentForTeacher) renderTeacherStudent(selectedStudentForTeacher);
+          else renderTeacherDashboard();
+        } else if(currentRole === "student") {
+          renderStudentHome();
+        } else {
+          updateSyncBadge();
+        }
+      }
+    });
+    remoteReady = true;
+    updateSyncBadge();
+  } catch(e) {
+    console.warn("Firebase init failed; using localStorage only.", e);
+    remoteReady = false;
+    updateSyncBadge();
+  }
+}
+
+renderLogin();
+initOptionalFirebase();
+</script>
+</body>
+</html>
