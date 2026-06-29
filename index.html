@@ -60,6 +60,7 @@
     button.ghost { background:#fff7ed; color:#c2410c; border:2px solid #fed7aa; box-shadow:none; }
     button.small { padding:8px 12px; border-radius:14px; font-size:15px; }
     button.tts { min-width:40px; padding:8px 10px; border-radius:999px; background:#0ea5e9; }
+    button:disabled { opacity:.45; cursor:not-allowed; transform:none; }
     input, select {
       padding:15px 16px; border:2px solid #fed7aa; border-radius:18px; font-size:20px;
       background:white; outline:none;
@@ -1685,6 +1686,7 @@ let quizStartTime = null;
 let reviewMode = false;
 let reviewOriginalIndexes = [];
 let selectedStudentForTeacher = null;
+const STORAGE_KEY = "potentialClassAChineseSummerHomeworkRecords_v1";
 let records = loadLocal();
 let remoteReady = false;
 let unsubscribeRemote = null;
@@ -1732,7 +1734,11 @@ function loadLocal(){
 }
 
 function saveLocal(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  } catch(e) {
+    console.warn("local save failed", e);
+  }
 }
 
 async function saveRecords(){
@@ -1812,7 +1818,7 @@ if("speechSynthesis" in window) {
 }
 
 function ttsButton(text, label="🔊"){
-  return `<button class="tts small" type="button" onclick='speak(${JSON.stringify(text)})' title="報讀">${label}</button>`;
+  return `<button class="tts small" type="button" onclick='event.stopPropagation(); speak(${JSON.stringify(text)})' title="報讀">${label}</button>`;
 }
 window.speak = speak;
 
@@ -1902,7 +1908,7 @@ window.studentLogin = async function(name){
   currentStudent = name;
   records.students[name] ||= { logins: [], lessons: {} };
   records.students[name].logins.push({ time: nowText() });
-  await saveRecords();
+  try { await saveRecords(); } catch(e) { console.warn("save before student home failed", e); }
   renderStudentHome();
 };
 
@@ -1951,7 +1957,7 @@ window.startLesson = function(lessonId){
     alert("這一課題目尚未準備完成，請通知老師。");
     return;
   }
-  currentQuestions = currentLesson.questions.map((q, idx) => ({...q, originalIndex: idx}));
+  currentQuestions = currentLesson.questions.map((q, idx) => normalizeQuestion(q, idx));
   currentIndex = 0; answers = {}; reviewMode = false; reviewOriginalIndexes = [];
   quizStartTime = nowText();
   renderQuestion();
@@ -1959,8 +1965,36 @@ window.startLesson = function(lessonId){
 
 function optionLetter(i){ return ["A","B","C","D"][i] || String(i+1); }
 
+function normalizeQuestion(q, idx){
+  if(Array.isArray(q)){
+    return {
+      id: q[5] || `Q${idx+1}`,
+      question: q[0] || "",
+      options: Array.isArray(q[1]) ? q[1] : [],
+      answer: Number(q[2]),
+      explanation: q[3] || "",
+      paragraph: q[4] || "",
+      originalIndex: idx
+    };
+  }
+  return {
+    id: q.id || `Q${idx+1}`,
+    question: q.question || "",
+    options: Array.isArray(q.options) ? q.options : [],
+    answer: Number(q.answer),
+    explanation: q.explanation || "",
+    paragraph: q.paragraph || "",
+    originalIndex: idx
+  };
+}
+
 window.renderQuestion = function(){
   const q = currentQuestions[currentIndex];
+  if(!q || !Array.isArray(q.options) || q.options.length === 0){
+    alert("題目載入時發生問題，請返回課次後重新進入。");
+    renderStudentHome();
+    return;
+  }
   const percent = Math.round(((currentIndex+1)/currentQuestions.length)*100);
   const selected = answers[currentIndex];
   app.innerHTML = `
@@ -2237,7 +2271,7 @@ async function initOptionalFirebase(){
           if(selectedStudentForTeacher) renderTeacherStudent(selectedStudentForTeacher);
           else renderTeacherDashboard();
         } else if(currentRole === "student") {
-          renderStudentHome();
+          if(!currentLesson) renderStudentHome();
         } else {
           updateSyncBadge();
         }
